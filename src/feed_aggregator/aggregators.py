@@ -29,6 +29,7 @@ def aggregate(
     feed_compose = serializers.FeedCompose(
         id=id,
         title=title,
+        # TODO: use latest updated
         updated=updated or utils.now(),
         author_name=author_name,
         generator_name=generator_name,

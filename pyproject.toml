@@ -10,4 +10,31 @@ dependencies = [
 ]
 
 [tool.pdm.dev-dependencies]
-dev = ["pytest>=7.4.3"]
+dev = ["pytest>=7.4.3", "pytest-vcr>=1.0.2"]
+
+
+[tool.black] # https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html
+skip-string-normalization = 1
+
+[tool.ruff]
+line-length = 256
+extend-select = [
+    "W",   # pycodestyle Warning
+    "I",   # isort
+    "N",   # pep8-naming
+    "S",   # flake8-bandit
+    "PTH", # flake8-use-pathlib
+    "PGH", # pygrep-hooks
+    "TRY", # tryceratops
+]
+ignore = [
+    "E501",   # line-too-long
+    "S101",   # Use of `assert` detected
+    "TRY003", # raise-vanilla-args
+    "TRY400", # error-instead-of-exception
+]
+
+[tool.ruff.isort]
+# https://beta.ruff.rs/docs/settings/#isort
+force-single-line = true
+lines-after-imports = 2

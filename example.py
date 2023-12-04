@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 
 from feed_aggregator import aggregate
 
@@ -17,4 +18,4 @@ if __name__ == '__main__':
         title='''m9H8's feed''',
         author_name='m9H8',
     )
-    print(feedstr, file=open('_.xml', 'w'))
+    print(feedstr, file=Path('example.xml').open('w'))
