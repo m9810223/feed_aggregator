@@ -1,0 +1,37 @@
+on:
+  push:
+
+jobs:
+  pytest:
+    # if: false
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: # https://github.com/actions/runner-images#available-images
+          - ubuntu-22.04
+          - windows-2022
+        py_ver:
+          - "3.12"
+          - "3.11"
+          - "3.10"
+          - "3.9"
+
+    runs-on: ${{ matrix.os }}
+
+    defaults:
+      run:
+        working-directory: ./
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pdm-project/setup-pdm@v3
+        with:
+          python-version: ${{ matrix.py_ver }}
+          cache: true
+          cache-dependency-path: "**/pdm.lock"
+
+      - run: pdm install
+
+      - run: pdm run pytest
