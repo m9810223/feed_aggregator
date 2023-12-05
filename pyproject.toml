@@ -10,7 +10,7 @@ dependencies = [
 ]
 
 [tool.pdm.dev-dependencies]
-dev = ["pytest>=7.4.3", "pytest-vcr>=1.0.2"]
+dev = ["pytest>=7.4.3", "pytest-vcr>=1.0.2", "pytest-cov>=4.1.0"]
 
 
 [tool.black] # https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html
@@ -38,3 +38,10 @@ ignore = [
 # https://beta.ruff.rs/docs/settings/#isort
 force-single-line = true
 lines-after-imports = 2
+
+
+[tool.pytest.ini_options]
+# https://docs.pytest.org/en/stable/reference/reference.html
+# https://docs.pytest.org/en/stable/explanation/goodpractices.html
+# https://docs.pytest.org/en/stable/example/pythoncollection.html
+addopts = "-r fEsxX --disable-warnings --showlocals --tb=short --cov --cov-report=term --cov-report=html:./htmlcov"
