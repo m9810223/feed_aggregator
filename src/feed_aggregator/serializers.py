@@ -23,8 +23,8 @@ class Entry(BaseModel):
         fe = FeedEntry()
         fe.id(id=self.id)
         fe.title(title=self.title)
-        if self.updated is not None:
-            fe.updated(updated=self.updated)
+        # if self.updated is not None:
+        #     fe.updated(updated=self.updated)
         if self.published is not None:
             fe.published(published=self.published)
         fe.link(href=self.link)
@@ -41,17 +41,6 @@ class Feed(BaseModel):
         fpd: feedparser.util.FeedParserDict = feedparser.parse(feedtext)
         m = cls.model_validate(fpd)
         return m
-
-    def _model_dump_one_entry(self):
-        logging.warning('only one entry')
-        m = self.model_copy()
-        m.entries = list(m.entries)[:1]
-        return m
-
-    def _model_dump_json_one_entry(self):
-        m = self._model_dump_one_entry()
-        j = m.model_dump_json(indent=2)
-        return j
 
 
 class FeedCompose(BaseModel):

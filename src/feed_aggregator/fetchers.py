@@ -21,7 +21,5 @@ def fetch_url(url: str, *, client: t.Optional[httpx.Client] = None):
 
 
 def fetch_urls(urls: t.Iterable[str], *, client: t.Optional[httpx.Client] = None):
-    if client is None:
-        client = create_http_client()
     texts = (fetch_url(x, client=client) for x in urls)
     return texts
